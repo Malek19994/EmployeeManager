@@ -6,7 +6,6 @@ import tech.gettarray.employeemanager.exception.UserNotFoundException;
 import tech.gettarray.employeemanager.model.Employee;
 import tech.gettarray.employeemanager.repo.EmployeeRepo;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,19 +17,20 @@ public class EmployeeService {
     public EmployeeService(EmployeeRepo employeeRepo) {
         this.employeeRepo = employeeRepo;
     }
-    public Employee addemployee(Employee employee){
+    public Employee addEmployee(Employee employee) {
         employee.setEmployeeCode(UUID.randomUUID().toString());
         return employeeRepo.save(employee);
     }
     public List<Employee> findAllEmployee(){
         return employeeRepo.findAll();
     }
-    public Employee updateEmployee(Employee employee){
+    public Employee updateEmployee(Employee employee) {
         return employeeRepo.save(employee);
     }
-    public Employee findEmployeeById(Long id){
+
+    public Employee findEmployeeById(Long id) {
         return employeeRepo.findEmployeeById(id)
-                .orElseThrow(() -> new UserNotFoundException("User by id" +id+ "was not found"));
+                .orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
     }
 
     public void deleteEmployee(Long id){
